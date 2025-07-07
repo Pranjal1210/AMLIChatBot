@@ -1,0 +1,64 @@
+{
+  "agenda_id": "HR_Onboarding",
+  "start_node": "WelcomeNode",
+  "nodes": {
+    "WelcomeNode": {
+      "type": "text",
+      "prompt": "👋 Welcome to the company! Can you please tell us your full name?",
+      "next": "RoleChoice",
+      "on_response": "update_WelcomeNode"
+    },
+    "RoleChoice": {
+      "type": "choice",
+      "prompt": "What department are you joining?",
+      "choices": ["Engineering", "Marketing", "HR", "Sales", "Other"],
+      "on_response": {
+        "Engineering": "IDUpload",
+        "Marketing": "IDUpload",
+        "HR": "IDUpload",
+        "Sales": "IDUpload",
+        "Other": "IDUpload"
+      }
+    },
+    "IDUpload": {
+      "type": "file_upload",
+      "prompt": "📤 Please upload a scanned copy of your government-issued ID (Aadhar, Passport, etc.).",
+      "next": "AddressProofUpload"
+    },
+    "AddressProofUpload": {
+      "type": "file_upload",
+      "prompt": "🏠 Please upload your proof of address (Utility bill, rental agreement, etc.).",
+      "next": "LaptopRequired"
+    },
+    "LaptopRequired": {
+      "type": "choice",
+      "prompt": "Do you need a company-provided laptop?",
+      "choices": ["Yes", "No"],
+      "on_response": {
+        "Yes": "LaptopPreference",
+        "No": "CompleteProfile"
+      }
+    },
+    "LaptopPreference": {
+      "type": "choice",
+      "prompt": "Which OS do you prefer?",
+      "choices": ["Windows", "macOS", "Linux"],
+      "on_response": {
+        "Windows": "CompleteProfile",
+        "macOS": "CompleteProfile",
+        "Linux": "CompleteProfile"
+      }
+    },
+    "CompleteProfile": {
+      "type": "file_upload",
+      "prompt": "📁 Upload your completed employee information form (PDF/Docx).",
+      "next": "ThankYouNode"
+    },
+    "ThankYouNode": {
+      "type": "end",
+      "prompt": "🎉 All set! Thank you for completing the onboarding process."
+    }
+  }
+}
+
+
